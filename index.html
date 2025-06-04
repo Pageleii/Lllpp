@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><a href="" rel="nofollow"><img alt="banner" src="https://landings-cdn.adsterratech.com/referralBanners/gif/120x300_adsterra_reff.gif" /></a><script type="text/javascript">
+	atOptions = {
+		'key' : '0126d85100ebf2cbe66d946fe4550207',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/0126d85100ebf2cbe66d946fe4550207/invoke.js"></script><script type="text/javascript">
+	atOptions = {
+		'key' : 'ee421598e207ac643e2838e584c35b0d',
+		'format' : 'iframe',
+		'height' : 300,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/ee421598e207ac643e2838e584c35b0d/invoke.js"></script><script type="text/javascript">
+	atOptions = {
+		'key' : '262801d991abbce58346e672220caf93',
+		'format' : 'iframe',
+		'height' : 600,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/262801d991abbce58346e672220caf93/invoke.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Game Single Page Arcade!</title>
+    <style>
+        /* --- CSS Variables for Theming (Light Theme Default) --- */
+        :root {
+            --primary-color: #2980b9; /* Blue */
+            --secondary-color: #27ae60; /* Green */
+            --accent-color: #c0392b; /* Red */
+            --game-accent-color: #8e44ad; /* Purple for games */
+            --game-alt-accent-color: #f39c12; /* Orange for another game */
+            --text-color: #2c3e50;
+            --bg-color: #eef1f5;
+            --card-bg-color: #ffffff;
+            --dark-bg-color: #34495e;
+            --light-text-color: #ecf0f1;
+            --border-color: #dce1e6;
+
+            --border-radius: 10px;
+            --box-shadow: 0 5px 20px rgba(44, 62, 80, 0.1);
+            --transition-speed: 0.3s ease-in-out;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+            --header-height: 70px;
+        }
+
+        /* --- Dark Theme Variables --- */
+        body.dark-theme {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --game-accent-color: #9b59b6;
+            --game-alt-accent-color: #f1c40f;
+            --text-color: #bdc3c7;
+            --bg-color: #2c3e50;
+            --card-bg-color: #34495e;
+            --dark-bg-color: #1f2b38;
+            --light-text-color: #e0e0e0;
+            --border-color: #4a6278;
+            --box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* --- Basic Reset & Global Styles (condensed) --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { font-family: var(--font-body), sans-serif; line-height: 1.7; color: var(--text-color); background-color: var(--bg-color); display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; transition: background-color var(--transition-speed), color var(--transition-speed); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading), sans-serif; font-weight: 700; color: var(--text-color); line-height: 1.3; transition: color var(--transition-speed); }
+        .hero h2, header .logo { color: var(--light-text-color); }
+
+        /* --- Header Styles (condensed) --- */
+        header { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 0.8rem 0; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 3px 8px rgba(0,0,0,0.25); height: var(--header-height); display: flex; align-items: center; transition: background-color var(--transition-speed); }
+        header .container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        header .logo { font-size: 1.7rem; font-weight: 700; letter-spacing: 1px; margin: 0; color: var(--light-text-color); transition: color var(--transition-speed); }
+        .header-controls { display: flex; align-items: center; gap: 10px; }
+        .theme-toggle, .menu-toggle { background: none; border: none; color: var(--light-text-color); cursor: pointer; padding: 8px; display: flex; align-items: center; justify-content: center; }
+        .theme-toggle svg { width: 22px; height: 22px; fill: var(--light-text-color); transition: fill var(--transition-speed), transform 0.4s ease-out; }
+        .theme-toggle:hover svg { fill: var(--primary-color); } .theme-toggle .icon-moon { display: none; }
+        body.dark-theme .theme-toggle .icon-sun { display: none; } body.dark-theme .theme-toggle .icon-moon { display: block; }
+        .menu-toggle svg { width: 28px; height: 28px; stroke: var(--light-text-color); transition: stroke var(--transition-speed), transform 0.3s ease-out; }
+        .menu-toggle:hover svg { stroke: var(--primary-color); } .menu-toggle .icon-close { display:none; transform: rotate(-45deg) scale(0.8); }
+        .menu-toggle.is-active .icon-menu { display:none; transform: rotate(45deg) scale(0.8); } .menu-toggle.is-active .icon-close { display:block; transform: rotate(0deg) scale(1); }
+        .main-nav { position: absolute; top: calc(var(--header-height) - 1px); right: 15px; background-color: var(--dark-bg-color); width: 280px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); border-radius: 0 0 var(--border-radius) var(--border-radius); padding: 0.5rem 0; transform: translateY(-10px) scaleY(0.98); opacity: 0; visibility: hidden; transition: opacity var(--transition-speed), transform var(--transition-speed), visibility 0s var(--transition-speed), background-color var(--transition-speed); z-index: 1001; transform-origin: top right; overflow: hidden; }
+        .main-nav.is-open { opacity: 1; visibility: visible; transform: translateY(0) scaleY(1); transition: opacity var(--transition-speed), transform var(--transition-speed), visibility 0s; }
+        .main-nav ul { list-style: none; padding: 0; margin: 0; } .main-nav ul li { display: block; opacity: 0; transform: translateX(20px); transition: opacity 0.3s ease-out, transform 0.3s ease-out; }
+        .main-nav.is-open ul li { opacity: 1; transform: translateX(0); }
+        .main-nav ul li a { display: block; padding: 12px 20px; color: var(--light-text-color); text-decoration: none; font-weight: 500; transition: background-color var(--transition-speed), color var(--transition-speed); font-size: 0.95rem; }
+        .main-nav ul li a:hover, .main-nav ul li a.active { background-color: var(--primary-color); color: var(--light-text-color); } .main-nav ul li a.active { font-weight: 600; }
+
+        /* --- Main Content & Sections (condensed) --- */
+        main { flex-grow: 1; padding: 3rem 0; }
+        .section-padding { padding-top: calc(var(--header-height) + 30px); margin-top: calc(-1 * var(--header-height)); }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 2.5rem; position: relative; }
+        .section-title::after { content: ''; display: block; width: 70px; height: 3px; background: var(--primary-color); margin: 10px auto 0; border-radius: 2px; transition: background-color var(--transition-speed); }
+        .hero { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: var(--light-text-color); padding: 5rem 2rem; text-align: center; border-radius: var(--border-radius); margin-bottom: 3rem; box-shadow: var(--box-shadow); display: flex; flex-direction: column; align-items: center; transition: background var(--transition-speed), box-shadow var(--transition-speed); }
+        .hero-icon svg { width: 80px; height: 80px; fill: var(--light-text-color); margin-bottom: 1.5rem; opacity: 0.8; }
+        .hero h2 { font-size: 3.2rem; font-weight: 700; margin-bottom: 1.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.25); }
+        .hero p { font-size: 1.25rem; margin-bottom: 2.5rem; max-width: 750px; opacity: 0.9; }
+        .cta-button { display: inline-block; background-color: var(--accent-color); color: var(--light-text-color); padding: 16px 35px; text-decoration: none; border-radius: var(--border-radius); font-size: 1.2rem; font-weight: 600; transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed); box-shadow: 0 3px 8px rgba(0,0,0,0.2); }
+        .cta-button:hover { background-color: #a5281b; transform: translateY(-4px) scale(1.02); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .features, .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin-bottom: 3rem; }
+        .feature-item, .portfolio-item, .content-section, .testimonial-item { background-color: var(--card-bg-color); padding: 2.5rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow); transition: transform var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed), border-color var(--transition-speed); border: 1px solid var(--border-color); }
+        .feature-item:hover, .portfolio-item:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(44, 62, 80, 0.15); }
+        body.dark-theme .feature-item:hover, body.dark-theme .portfolio-item:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        .feature-item .icon-placeholder { font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem; transition: color var(--transition-speed); }
+        .feature-item h3 { color: var(--primary-color); font-size: 1.5rem; margin-bottom: 0.75rem; transition: color var(--transition-speed); }
+        .content-section { margin-bottom: 3rem; padding: 3rem; }
+        .content-section h3.section-subtitle { font-size: 2rem; margin-bottom: 1.5rem; border-bottom: 3px solid var(--primary-color); display: inline-block; padding-bottom: 0.5rem; transition: border-color var(--transition-speed); }
+        .content-section ul { list-style: none; padding-left: 0; } .content-section ul li { margin-bottom: 0.75rem; padding-left: 25px; position: relative; }
+        .content-section ul li::before { content: '✔'; color: var(--secondary-color); position: absolute; left: 0; font-weight: bold; transition: color var(--transition-speed); }
+        .portfolio-item { padding: 0; overflow: hidden; }
+        .portfolio-item .image-placeholder { height: 200px; background-color: #ccc; display: flex; align-items: center; justify-content: center; color: #777; font-style: italic; transition: background-color var(--transition-speed); }
+        body.dark-theme .portfolio-item .image-placeholder { background-color: #455a64; color: #90a4ae; }
+        .portfolio-item .portfolio-info { padding: 1.5rem; }
+        .portfolio-item .portfolio-info h4 { font-size: 1.3rem; color: var(--primary-color); margin-bottom: 0.5rem; transition: color var(--transition-speed); }
+        .testimonial-item { margin-bottom: 1.5rem; border-left: 6px solid var(--secondary-color); padding: 2rem; transition: border-color var(--transition-speed), background-color var(--transition-speed); }
+        .testimonial-item blockquote { font-style: italic; font-size: 1.1rem; margin-bottom: 1rem; line-height: 1.6; }
+        .testimonial-item cite { display: block; text-align: right; font-weight: bold; color: var(--secondary-color); font-size: 1rem; transition: color var(--transition-speed); }
+        .contact-form label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea { width: 100%; padding: 12px; margin-bottom: 1.5rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); font-family: var(--font-body); font-size: 1rem; background-color: var(--card-bg-color); color: var(--text-color); transition: border-color var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed); }
+        .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 20%, transparent); outline: none; }
+        .contact-form input:invalid, .contact-form textarea:invalid { border-color: var(--accent-color); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 20%, transparent); }
+        .contact-form textarea { min-height: 150px; resize: vertical; }
+        .contact-form .submit-button { display: inline-block; background-color: var(--secondary-color); color: var(--light-text-color); padding: 14px 30px; border: none; border-radius: var(--border-radius); font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background-color var(--transition-speed), transform var(--transition-speed); }
+        body.dark-theme .contact-form .submit-button { background-color: var(--secondary-color); }
+        .contact-form .submit-button:hover { background-color: color-mix(in srgb, var(--secondary-color) 85%, black); transform: translateY(-2px); }
+        #backToTopBtn { display: none; position: fixed; bottom: 30px; right: 30px; z-index: 999; border: none; outline: none; background-color: var(--accent-color); color: var(--light-text-color); cursor: pointer; padding: 0; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; box-shadow: 0 3px 10px rgba(0,0,0,0.25); transition: background-color var(--transition-speed), opacity var(--transition-speed), transform var(--transition-speed); opacity: 0; transform: translateY(20px); }
+        #backToTopBtn.show { display: flex; align-items: center; justify-content: center; opacity: 1; transform: translateY(0); }
+        #backToTopBtn:hover { background-color: color-mix(in srgb, var(--accent-color) 85%, black); transform: translateY(-2px) scale(1.05); }
+        footer { background-color: var(--dark-bg-color); color: #bdc3c7; text-align: center; padding: 2.5rem 0; transition: background-color var(--transition-speed); }
+        body.dark-theme footer { color: #a0a7ac; }
+        footer p { font-size: 0.95rem; } footer a { color: var(--primary-color); text-decoration: none; transition: color var(--transition-speed); }
+        footer a:hover { text-decoration: underline; }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s var(--transition-speed), transform 0.6s var(--transition-speed); }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .animate-on-scroll.stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+        
+        /* --- Universal Game Modal Styles --- */
+        .game-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: none; align-items: center; justify-content: center; z-index: 2000; opacity: 0; transition: opacity var(--transition-speed); }
+        .game-modal-overlay.is-visible { display: flex; opacity: 1; }
+        .game-modal { background-color: var(--card-bg-color); padding: 25px; border-radius: var(--border-radius); box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center; max-width: 90vw; max-height: 90vh; display: flex; flex-direction: column; transform: scale(0.95); transition: transform var(--transition-speed), background-color var(--transition-speed); }
+        .game-modal-overlay.is-visible .game-modal { transform: scale(1); }
+        .game-modal .game-modal-title { /* Unique ID for each game title for aria */ margin-bottom: 15px; font-size: 1.8rem; transition: color var(--transition-speed); }
+        .game-modal .game-instructions { font-size: 0.9rem; margin-top: 10px; margin-bottom: 15px; color: var(--text-color); opacity: 0.8; transition: color var(--transition-speed); }
+        .game-modal .game-info { margin-top: 15px; font-size: 1.1rem; font-weight: 600; color: var(--text-color); transition: color var(--transition-speed); }
+        .game-modal-controls { margin-top: 20px; display: flex; justify-content: space-around; gap: 10px; }
+        .game-modal-button { padding: 10px 20px; border: none; border-radius: var(--border-radius); cursor: pointer; font-weight: 600; transition: background-color var(--transition-speed), color var(--transition-speed); }
+        .start-game-button { background-color: var(--secondary-color); color: var(--light-text-color); }
+        .start-game-button:hover { background-color: color-mix(in srgb, var(--secondary-color) 85%, black); }
+        .close-game-modal-button { background-color: var(--accent-color); color: var(--light-text-color); }
+        .close-game-modal-button:hover { background-color: color-mix(in srgb, var(--accent-color) 85%, black); }
+        .open-game-modal-button { background-color: var(--game-accent-color); color: var(--light-text-color); padding: 14px 30px; border: none; border-radius: var(--border-radius); font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background-color var(--transition-speed), transform var(--transition-speed); }
+        .open-game-modal-button:hover { background-color: color-mix(in srgb, var(--game-accent-color) 85%, black); transform: translateY(-2px); }
+        .play-game-section { text-align: center; margin-bottom: 3rem; }
+        
+        /* --- Snake Game Specific --- */
+        #snakeGameCanvas { border: 2px solid var(--border-color); background-color: var(--bg-color); transition: border-color var(--transition-speed), background-color var(--transition-speed); max-width: 100%; height: auto; }
+        #snakeModalTitle { color: var(--game-accent-color); }
+
+        /* --- Tic-Tac-Toe Game Specific --- */
+        #ticTacToeModalTitle { color: var(--game-alt-accent-color); }
+        .tic-tac-toe-board { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); width: 300px; height: 300px; margin: 20px auto; border: 2px solid var(--border-color); background-color: var(--bg-color); transition: border-color var(--transition-speed), background-color var(--transition-speed); }
+        .ttt-cell { border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-family: var(--font-heading); cursor: pointer; transition: background-color 0.1s, border-color var(--transition-speed), color var(--transition-speed); color: var(--text-color); }
+        .ttt-cell:hover:not(.occupied) { background-color: color-mix(in srgb, var(--primary-color) 15%, transparent); }
+        .ttt-cell.X { color: var(--accent-color); }
+        .ttt-cell.O { color: var(--secondary-color); }
+
+        /* --- Pong Game Specific --- */
+        #pongModalTitle { color: var(--primary-color); }
+        #pongGameCanvas { border: 2px solid var(--border-color); background-color: var(--bg-color); transition: border-color var(--transition-speed), background-color var(--transition-speed); max-width: 100%; height: auto; }
+
+        /* Responsive for Modals and Games */
+        @media (max-width: 576px) {
+            .game-modal { padding: 15px; } .game-modal .game-modal-title { font-size: 1.5rem; }
+            .game-modal-button { padding: 8px 15px; font-size: 0.9rem; }
+            .tic-tac-toe-board { width: 240px; height: 240px; } .ttt-cell { font-size: 2.5rem; }
+            /* Other existing responsive styles... */
+            .main-nav { width: 100%; right:0; } .header-controls { gap: 5px; }
+            .theme-toggle svg { width: 20px; height: 20px; } .menu-toggle svg { width: 26px; height: 26px; }
+            html { font-size: 15px; } .hero { padding: 3.5rem 1.5rem; }
+            .hero h2 { font-size: 2rem; } .hero p { font-size: 1.1rem; }
+            .cta-button { padding: 14px 28px; font-size: 1.1rem; }
+            .section-title { font-size: 1.8rem; margin-bottom: 2rem;}
+            .content-section, .feature-item { padding: 2rem; }
+            .features, .portfolio-grid { gap: 1.5rem; }
+            #backToTopBtn { width: 45px; height: 45px; font-size: 20px; bottom: 20px; right: 20px; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">ArcadeSite 🕹️</div>
+            <div class="header-controls">
+                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5A7.5 7.5 0 004.5 12a7.5 7.5 0 007.5 7.5A7.5 7.5 0 0019.5 12a7.5 7.5 0 00-7.5-7.5zM12 6a6 6 0 016 6 6 6 0 01-6 6 6 6 0 01-6-6 6 6 0 016-6zm0-4a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 18a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm-7.07-2.93a1 1 0 011.414-1.414l1.414 1.414a1 1 0 11-1.414 1.414l-1.414-1.414zm12.728 0a1 1 0 011.414 1.414l-1.414 1.414a1 1 0 11-1.414-1.414l1.414-1.414zM4.929 4.929a1 1 0 011.414 0l1.414 1.414A1 1 0 016.343 7.757L4.93 6.343a1 1 0 010-1.414zm12.728 0a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM2 12a1 1 0 011-1h2a1 1 0 110 2H3a1 1 0 01-1-1zm18 0a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z"/></svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 2.502a9.502 9.502 0 00-1.516 18.905A9.502 9.502 0 0021.506 13.5a9.455 9.455 0 00-1.99-5.728A9.503 9.503 0 0012.004 2.502zM10.49 4.058a8.002 8.002 0 011.416 15.886A8.002 8.002 0 014.018 12a8.002 8.002 0 016.472-7.942z"/></svg>
+                </button>
+                <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mainNavMenu">
+                    <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                    <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <nav class="main-nav" id="mainNavMenu">
+                 <ul>
+                    <li><a href="#home" class="active" aria-current="page">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#snake-game-section">Snake</a></li>
+                    <li><a href="#ttt-game-section">TicTacToe</a></li>
+                    <li><a href="#pong-game-section">Pong</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section id="home" class="hero section-padding animate-on-scroll">
+                <div class="hero-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.03c-5.51.01-9.97 4.47-9.97 9.97s4.46 9.97 9.97 9.97 9.97-4.46 9.97-9.97S17.51 2.03 12 2.03zm0 1.5c4.68 0 8.47 3.79 8.47 8.47S16.68 20.47 12 20.47 3.53 16.68 3.53 12 7.32 3.53 12 3.53zm-.49 3.22v5.55l4.88 2.91.79-1.31-4.18-2.48V6.75h-1.49z"/></svg>
+                </div>
+                <h2>Welcome to the Mini Arcade!</h2>
+                <p>Play classic games like Snake, Tic-Tac-Toe, and Pong, all within this single-page wonder. Enjoy themes, animations, and more!
+                </p>
+                <a href="#features" class="cta-button">Explore Site Features</a>
+            </section>
+
+            <section id="features" class="section-padding">
+                <h2 class="section-title animate-on-scroll">Core Features</h2>
+                <div class="features animate-on-scroll stagger">
+                    <div class="feature-item">
+                        <div class="icon-placeholder">🎮</div>
+                        <h3>Multiple Games</h3>
+                        <p>Play Snake, Tic-Tac-Toe, and Pong! More classics, more fun.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon-placeholder">🌓</div>
+                        <h3>Theme Toggle</h3>
+                        <p>Switch between light and dark modes for personalized viewing.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon-placeholder">✨</div>
+                        <h3>Polished UI</h3>
+                        <p>Smooth animations, responsive design, and accessibility considerations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Snake Game Section -->
+            <section id="snake-game-section" class="play-game-section section-padding animate-on-scroll">
+                <h2 class="section-title">Classic Snake</h2>
+                <button class="open-game-modal-button" data-game="snake">Play Snake!</button>
+            </section>
+
+            <!-- Tic-Tac-Toe Game Section -->
+            <section id="ttt-game-section" class="play-game-section section-padding animate-on-scroll">
+                <h2 class="section-title">Tic-Tac-Toe</h2>
+                <button class="open-game-modal-button" data-game="ttt" style="background-color: var(--game-alt-accent-color);">Play Tic-Tac-Toe!</button>
+            </section>
+
+            <!-- Pong Game Section -->
+            <section id="pong-game-section" class="play-game-section section-padding animate-on-scroll">
+                <h2 class="section-title">Retro Pong</h2>
+                <button class="open-game-modal-button" data-game="pong" style="background-color: var(--primary-color);">Play Pong!</button>
+            </section>
+
+
+            <section id="about" class="content-section section-padding animate-on-scroll">
+                <h3 class="section-subtitle">About This Arcade</h3>
+                <p>This single HTML file now hosts a mini-arcade! It's a demonstration of integrating multiple interactive components, themes, and responsive design. While fun, for larger projects, modularity is key.</p>
+            </section>
+            
+            <section id="contact" class="content-section section-padding animate-on-scroll">
+                <h3 class="section-subtitle">Get in Touch</h3>
+                <form action="#" method="POST" class="contact-form">
+                    <div><label for="name">Your Name:</label><input type="text" id="name" name="name" placeholder="e.g., Jane Doe" required minlength="2"></div>
+                    <div><label for="email">Your Email:</label><input type="email" id="email" name="email" placeholder="e.g., jane.doe@example.com" required></div>
+                    <div><label for="message">Your Message:</label><textarea id="message" name="message" placeholder="Tell us about your project or query..." required minlength="10"></textarea></div>
+                    <button type="submit" class="submit-button">Send Message (Placeholder)</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Snake Game Modal -->
+    <div class="game-modal-overlay" id="snakeGameModalOverlay">
+        <div class="game-modal" role="dialog" aria-labelledby="snakeModalTitle" aria-describedby="snakeModalDescription">
+            <h3 id="snakeModalTitle" class="game-modal-title">Classic Snake Game</h3>
+            <p id="snakeModalDescription" class="game-instructions">Arrow Keys to move. Eat food. Avoid walls & self!</p>
+            <canvas id="snakeGameCanvas" width="400" height="400"></canvas>
+            <div class="game-info">Score: <span id="snakeGameScore">0</span></div>
+            <div class="game-modal-controls">
+                <button class="game-modal-button start-game-button" id="snakeStartGameButton">Start Game</button>
+                <button class="game-modal-button close-game-modal-button" data-modal-id="snakeGameModalOverlay">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tic-Tac-Toe Game Modal -->
+    <div class="game-modal-overlay" id="tttGameModalOverlay">
+        <div class="game-modal" role="dialog" aria-labelledby="tttModalTitle" aria-describedby="tttModalDescription">
+            <h3 id="tttModalTitle" class="game-modal-title">Tic-Tac-Toe</h3>
+            <p id="tttModalDescription" class="game-instructions">Click a cell to place your mark. Get three in a row!</p>
+            <div class="tic-tac-toe-board" id="ticTacToeBoard">
+                <!-- Cells will be generated by JS -->
+            </div>
+            <div class="game-info" id="tttGameStatus">Player X's Turn</div>
+            <div class="game-modal-controls">
+                <button class="game-modal-button start-game-button" id="tttStartGameButton">New Game</button>
+                <button class="game-modal-button close-game-modal-button" data-modal-id="tttGameModalOverlay">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pong Game Modal -->
+    <div class="game-modal-overlay" id="pongGameModalOverlay">
+        <div class="game-modal" role="dialog" aria-labelledby="pongModalTitle" aria-describedby="pongModalDescription">
+            <h3 id="pongModalTitle" class="game-modal-title">Retro Pong</h3>
+            <p id="pongModalDescription" class="game-instructions">Player 1 (Left): W (Up), S (Down). Player 2 (Right): Arrow Up, Arrow Down.</p>
+            <canvas id="pongGameCanvas" width="600" height="400"></canvas>
+            <div class="game-info"><span id="pongPlayer1Score">0</span> - <span id="pongPlayer2Score">0</span></div>
+            <div class="game-modal-controls">
+                <button class="game-modal-button start-game-button" id="pongStartGameButton">Start Game</button>
+                <button class="game-modal-button close-game-modal-button" data-modal-id="pongGameModalOverlay">Close</button>
+            </div>
+        </div>
+    </div>
+
+
+    <button onclick="scrollToTop()" id="backToTopBtn" title="Go to top" aria-label="Scroll to top of page">⬆</button>
+    <footer><div class="container"><p>© <span id="currentYear"></span> Single Page Arcade. All Rights Reserved.</p></div></footer>
+
+    <script>
+    // --- Global State & Utilities ---
+    let activeGameModalId = null; // To track which game modal is open for key handling
+    const PREVENT_DEFAULT_KEYS = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space', 'w', 's', 'W', 'S'];
+    document.addEventListener('keydown', function(e) {
+        if (activeGameModalId && PREVENT_DEFAULT_KEYS.includes(e.key)) {
+            e.preventDefault();
+        }
+    });
+    function openModal(modalId) {
+        const modalOverlay = document.getElementById(modalId);
+        if (modalOverlay) {
+            modalOverlay.classList.add('is-visible');
+            document.body.style.overflow = 'hidden';
+            activeGameModalId = modalId; // Set active modal
+            // Focus first focusable element in modal, e.g., start button
+            const startButton = modalOverlay.querySelector('.start-game-button');
+            if (startButton) setTimeout(() => startButton.focus(), 100);
+        }
+    }
+    function closeModal(modalId) {
+        const modalOverlay = document.getElementById(modalId);
+        if (modalOverlay) {
+            modalOverlay.classList.remove('is-visible');
+            document.body.style.overflow = '';
+            if (activeGameModalId === modalId) activeGameModalId = null; // Clear active modal
+            // Potentially stop any running game interval for this modal
+            if (modalId === 'snakeGameModalOverlay' && snakeGame.isRunning()) snakeGame.stop();
+            if (modalId === 'pongGameModalOverlay' && pongGame.isRunning()) pongGame.stop();
+        }
+    }
+    document.querySelectorAll('.open-game-modal-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const gameType = this.dataset.game;
+            if (gameType === 'snake') openModal('snakeGameModalOverlay');
+            else if (gameType === 'ttt') { openModal('tttGameModalOverlay'); ticTacToeGame.startGame(); }
+            else if (gameType === 'pong') openModal('pongGameModalOverlay');
+        });
+    });
+    document.querySelectorAll('.close-game-modal-button').forEach(button => {
+        button.addEventListener('click', function() { closeModal(this.dataset.modalId); });
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && activeGameModalId) {
+            closeModal(activeGameModalId);
+        }
+    });
+
+    // --- General Page JS (Theme, Menu, Scroll - condensed for brevity) ---
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    (function themeToggleIIFE(){ /* ... theme logic ... */ 
+        const btn=document.querySelector('.theme-toggle'),body=document.body,theme=localStorage.getItem('theme');
+        function apply(t){(t==='dark')?body.classList.add('dark-theme'):body.classList.remove('dark-theme');}
+        if(theme)apply(theme);else{const pD=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;if(pD){apply('dark');localStorage.setItem('theme','dark');}}
+        btn.addEventListener('click',()=>{body.classList.toggle('dark-theme');localStorage.setItem('theme',body.classList.contains('dark-theme')?'dark':'light');});
+    })();
+    (function kebabMenuIIFE(){ /* ... menu logic ... */
+        const btn=document.querySelector('.menu-toggle'),nav=document.querySelector('.main-nav'),items=nav.querySelectorAll('ul > li');
+        if(!btn||!nav)return;btn.addEventListener('click',()=>{const o=nav.classList.toggle('is-open');btn.setAttribute('aria-expanded',o.toString());btn.classList.toggle('is-active',o);if(o){items.forEach((it,i)=>{it.style.transitionDelay=`${i*0.07}s`;});if(items.length>0&&items[0].querySelector('a'))setTimeout(()=>items[0].querySelector('a').focus(),100);}else items.forEach(it=>it.style.transitionDelay='0s');});
+        nav.querySelectorAll('a').forEach(l=>{l.addEventListener('click',()=>{if(nav.classList.contains('is-open')){nav.classList.remove('is-open');btn.setAttribute('aria-expanded','false');btn.classList.remove('is-active');items.forEach(it=>it.style.transitionDelay='0s');}});});
+        document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('is-open')){nav.classList.remove('is-open');btn.setAttribute('aria-expanded','false');btn.classList.remove('is-active');items.forEach(it=>it.style.transitionDelay='0s');btn.focus();}});
+        document.addEventListener('click',e=>{if(nav.classList.contains('is-open')&&!nav.contains(e.target)&&!btn.contains(e.target)&&!document.querySelector('.theme-toggle').contains(e.target)){nav.classList.remove('is-open');btn.setAttribute('aria-expanded','false');btn.classList.remove('is-active');items.forEach(it=>it.style.transitionDelay='0s');}});
+    })();
+    (function backToTopIIFE(){ /* ... scroll logic ... */
+        const btn=document.getElementById("backToTopBtn"),t=200;window.onscroll=()=>{handlePageScroll();};
+        function handlePageScroll(){(document.body.scrollTop>t||document.documentElement.scrollTop>t)?btn.classList.add("show"):btn.classList.remove("show");highlightNavOnScroll();}
+        window.scrollToTop=()=>window.scrollTo({top:0,behavior:'smooth'});
+    })();
+    (function navHighlightIIFE(){ /* ... nav highlight ... */
+        const s=document.querySelectorAll("main section[id]"),l=document.querySelectorAll(".main-nav a"),h=document.querySelector('header')?document.querySelector('header').offsetHeight:70;
+        window.highlightNavOnScroll=()=>{let cS="";const sP=window.scrollY+h+20;s.forEach(sec=>{if(sP>=sec.offsetTop&&sP<sec.offsetTop+sec.offsetHeight)cS=sec.getAttribute("id");});l.forEach(link=>{link.classList.remove("active");link.removeAttribute("aria-current");if(link.getAttribute("href")==="#"+cS){link.classList.add("active");link.setAttribute("aria-current","page");}});if(!cS&&window.scrollY<(s[0].offsetTop-h)){if(l[0]){l[0].classList.add("active");l[0].setAttribute("aria-current","page");}}};
+    })();
+    (function scrollAnimationsIIFE(){ /* ... scroll animations ... */
+        const els=document.querySelectorAll('.animate-on-scroll'),cb=(es,ob)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');if(e.target.classList.contains('stagger')){const c=e.target.children;for(let i=0;i<c.length;i++)setTimeout(()=>{c[i].style.opacity='1';c[i].style.transform='translateY(0)';},i*150);}}});},op={root:null,rootMargin:'0px',threshold:0.1},obs=new IntersectionObserver(cb,op);els.forEach(el=>obs.observe(el));
+    })();
+    (function contactFormIIFE(){ /* ... contact form ... */
+        const f=document.querySelector('.contact-form');if(f)f.addEventListener('submit',function(e){e.preventDefault();if(this.checkValidity()){alert('Form submitted (placeholder)!');this.reset();}else{alert('Please fill out all required fields correctly.');const i=this.querySelector(':invalid');if(i)i.focus();}});
+    })();
+    function colorMix(c1,c2,w){try{let p=s=>parseInt(s.substring(1),16),r1=p(c1)>>16,g1=(p(c1)>>8)&0xFF,b1=p(c1)&0xFF,r2=p(c2)>>16,g2=(p(c2)>>8)&0xFF,b2=p(c2)&0xFF;let r=Math.round(r1*(1-w)+r2*w),g=Math.round(g1*(1-w)+g2*w),b=Math.round(b1*(1-w)+b2*w);return`#${(1<<24|r<<16|g<<8|b).toString(16).slice(1).padStart(6,'0')}`; }catch(e){return c1;}}
+
+    // --- Snake Game (IIFE to encapsulate) ---
+    const snakeGame = (function() {
+        const canvas = document.getElementById('snakeGameCanvas');
+        const scoreDisplay = document.getElementById('snakeGameScore');
+        const startButton = document.getElementById('snakeStartGameButton');
+        if (!canvas) return { init: ()=>{}, startGame: ()=>{}, stop: ()=>{}, isRunning: ()=>false }; // Guard
+        const ctx = canvas.getContext('2d');
+        const TILE_SIZE = 20, W = canvas.width, H = canvas.height, TILES_X = W/TILE_SIZE, TILES_Y = H/TILE_SIZE;
+        let snake, food, score, dx, dy, loopInterval, isGameOver, isGameRunning;
+
+        function initVars() { snake = [{x:Math.floor(TILES_X/2), y:Math.floor(TILES_Y/2)}]; spawnFood(); score = 0; dx = 1; dy = 0; isGameOver = false; isGameRunning = false; updateScore(); startButton.textContent = "Start Game"; startButton.disabled = false; }
+        function spawnFood() { food = {x:Math.floor(Math.random()*TILES_X), y:Math.floor(Math.random()*TILES_Y)}; for(let seg of snake) if(food.x===seg.x && food.y===seg.y) { spawnFood(); return; }}
+        function updateScore() { scoreDisplay.textContent = score; }
+        function drawRect(x,y,w,h,c) { ctx.fillStyle=c; ctx.fillRect(x,y,w,h); }
+        function draw() {
+            const snakeClr = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color').trim();
+            const headClr = colorMix(snakeClr, '#000000', 0.2);
+            const foodClr = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+            const bgClr = getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim();
+            drawRect(0,0,W,H,bgClr); // Clear
+            drawRect(food.x*TILE_SIZE, food.y*TILE_SIZE, TILE_SIZE, TILE_SIZE, foodClr); // Food
+            snake.forEach((seg,i) => drawRect(seg.x*TILE_SIZE, seg.y*TILE_SIZE, TILE_SIZE, TILE_SIZE, i===0?headClr:snakeClr)); // Snake
+        }
+        function move() { const head={x:snake[0].x+dx,y:snake[0].y+dy}; snake.unshift(head); if(head.x===food.x && head.y===food.y){score++;updateScore();spawnFood();}else snake.pop();}
+        function checkCollision() { const h=snake[0]; if(h.x<0||h.x>=TILES_X||h.y<0||h.y>=TILES_Y)return true; for(let i=1;i<snake.length;i++)if(h.x===snake[i].x&&h.y===snake[i].y)return true; return false;}
+        function gameOver() { isGameOver=true; isGameRunning=false; clearInterval(loopInterval); ctx.fillStyle='rgba(0,0,0,0.75)';ctx.fillRect(0,0,W,H); ctx.font="30px "+getComputedStyle(document.documentElement).getPropertyValue('--font-heading').trim();ctx.fillStyle="white";ctx.textAlign="center";ctx.fillText("Game Over!",W/2,H/2-20);ctx.font="20px "+getComputedStyle(document.documentElement).getPropertyValue('--font-heading').trim();ctx.fillText("Score: "+score,W/2,H/2+20); startButton.textContent="Play Again?"; startButton.disabled=false; }
+        function gameLoop() { if(isGameOver)return; move(); draw(); if(checkCollision())gameOver(); }
+        function startGame() { if(isGameRunning)return; initVars(); isGameRunning=true; startButton.textContent="Playing..."; startButton.disabled=true; loopInterval=setInterval(gameLoop,130); draw(); }
+        function stopGame() { clearInterval(loopInterval); isGameRunning=false; isGameOver=true; /* Optionally clear canvas or show paused */ }
+        function handleKey(e) { if(!isGameRunning||isGameOver||activeGameModalId !== 'snakeGameModalOverlay')return; if(e.key==='ArrowLeft'&&dx!==1){dx=-1;dy=0;}else if(e.key==='ArrowUp'&&dy!==1){dx=0;dy=-1;}else if(e.key==='ArrowRight'&&dx!==-1){dx=1;dy=0;}else if(e.key==='ArrowDown'&&dy!==-1){dx=0;dy=1;}}
+        
+        startButton.addEventListener('click', startGame);
+        document.addEventListener('keydown', handleKey);
+        initVars(); // Initialize on load, but don't start.
+        return { init: initVars, startGame: startGame, stop: stopGame, isRunning: () => isGameRunning };
+    })();
+
+    // --- Tic-Tac-Toe Game (IIFE) ---
+    const ticTacToeGame = (function() {
+        const boardElement = document.getElementById('ticTacToeBoard');
+        const statusElement = document.getElementById('tttGameStatus');
+        const startButton = document.getElementById('tttStartGameButton');
+        if (!boardElement) return { startGame: ()=>{} }; // Guard
+
+        let board, currentPlayer, isGameOver;
+        const PLAYER_X = 'X', PLAYER_O = 'O';
+
+        function createBoard() {
+            boardElement.innerHTML = ''; // Clear previous board
+            board = Array(9).fill(null);
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('ttt-cell');
+                cell.dataset.index = i;
+                cell.addEventListener('click', handleCellClick);
+                boardElement.appendChild(cell);
+            }
+        }
+        function startGame() { createBoard(); currentPlayer = PLAYER_X; isGameOver = false; updateStatus(currentPlayer + "'s Turn"); }
+        function handleCellClick(event) {
+            if (isGameOver) return;
+            const index = event.target.dataset.index;
+            if (board[index] === null) {
+                board[index] = currentPlayer;
+                event.target.textContent = currentPlayer;
+                event.target.classList.add(currentPlayer, 'occupied');
+                if (checkWin(currentPlayer)) {
+                    updateStatus(currentPlayer + " Wins!"); isGameOver = true;
+                } else if (board.every(cell => cell !== null)) {
+                    updateStatus("It's a Draw!"); isGameOver = true;
+                } else {
+                    currentPlayer = (currentPlayer === PLAYER_X) ? PLAYER_O : PLAYER_X;
+                    updateStatus(currentPlayer + "'s Turn");
+                }
+            }
+        }
+        function checkWin(player) {
+            const winPatterns = [ [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] ];
+            return winPatterns.some(pattern => pattern.every(index => board[index] === player));
+        }
+        function updateStatus(message) { statusElement.textContent = message; }
+        
+        startButton.addEventListener('click', startGame);
+        // No specific key handling for TTT, relies on clicks.
+        return { startGame: startGame };
+    })();
+
+    // --- Pong Game (IIFE) ---
+    const pongGame = (function() {
+        const canvas = document.getElementById('pongGameCanvas');
+        const p1ScoreDisplay = document.getElementById('pongPlayer1Score');
+        const p2ScoreDisplay = document.getElementById('pongPlayer2Score');
+        const startButton = document.getElementById('pongStartGameButton');
+        if (!canvas) return { init: ()=>{}, startGame: ()=>{}, stop: ()=>{}, isRunning: ()=>false }; // Guard
+        const ctx = canvas.getContext('2d');
+
+        const PADDLE_HEIGHT = 80, PADDLE_WIDTH = 10, BALL_RADIUS = 8;
+        const CANVAS_W = canvas.width, CANVAS_H = canvas.height;
+        let p1Y, p2Y, ballX, ballY, ballSpeedX, ballSpeedY, p1Score, p2Score;
+        let gameLoopInterval, isGameRunningPong;
+        const PADDLE_SPEED = 6;
+
+        // Key states for smooth paddle movement
+        const keysPressed = {};
+        document.addEventListener('keydown', (e) => { if(activeGameModalId==='pongGameModalOverlay') keysPressed[e.key.toLowerCase()] = true; });
+        document.addEventListener('keyup', (e) => { if(activeGameModalId==='pongGameModalOverlay') keysPressed[e.key.toLowerCase()] = false; });
+
+
+        function initVarsPong() {
+            p1Y = p2Y = CANVAS_H / 2 - PADDLE_HEIGHT / 2;
+            resetBall();
+            p1Score = p2Score = 0;
+            updatePongScore();
+            isGameRunningPong = false;
+            startButton.textContent = "Start Game"; startButton.disabled = false;
+        }
+        function resetBall() {
+            ballX = CANVAS_W / 2; ballY = CANVAS_H / 2;
+            ballSpeedX = Math.random() > 0.5 ? 4 : -4; // Random initial horizontal direction
+            ballSpeedY = Math.random() * 6 - 3;      // Random vertical speed between -3 and 3
+            if (Math.abs(ballSpeedY) < 1) ballSpeedY = ballSpeedY > 0 ? 1 : -1; // Ensure some vertical movement
+        }
+        function updatePongScore() { p1ScoreDisplay.textContent = p1Score; p2ScoreDisplay.textContent = p2Score; }
+        function drawRectPong(x,y,w,h,c) { ctx.fillStyle=c; ctx.fillRect(x,y,w,h); }
+        function drawCircle(x,y,r,c) { ctx.fillStyle=c; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2,false); ctx.fill(); }
+        function drawPong() {
+            const paddleColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
+            const ballColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+            const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim();
+            drawRectPong(0,0,CANVAS_W,CANVAS_H, bgColor); // Clear
+            drawRectPong(0, p1Y, PADDLE_WIDTH, PADDLE_HEIGHT, paddleColor); // P1 Paddle
+            drawRectPong(CANVAS_W-PADDLE_WIDTH, p2Y, PADDLE_WIDTH, PADDLE_HEIGHT, paddleColor); // P2 Paddle
+            drawCircle(ballX, ballY, BALL_RADIUS, ballColor); // Ball
+            // Dashed line in middle (optional)
+            ctx.strokeStyle = colorMix(paddleColor, bgColor, 0.5); ctx.lineWidth = 2; ctx.setLineDash([10,10]);
+            ctx.beginPath(); ctx.moveTo(CANVAS_W/2, 0); ctx.lineTo(CANVAS_W/2, CANVAS_H); ctx.stroke(); ctx.setLineDash([]);
+        }
+        function movePaddles() {
+            // Player 1 (Left: W, S)
+            if(keysPressed['w'] && p1Y > 0) p1Y -= PADDLE_SPEED;
+            if(keysPressed['s'] && p1Y < CANVAS_H - PADDLE_HEIGHT) p1Y += PADDLE_SPEED;
+            // Player 2 (Right: ArrowUp, ArrowDown)
+            if(keysPressed['arrowup'] && p2Y > 0) p2Y -= PADDLE_SPEED;
+            if(keysPressed['arrowdown'] && p2Y < CANVAS_H - PADDLE_HEIGHT) p2Y += PADDLE_SPEED;
+        }
+        function moveBallPong() {
+            ballX += ballSpeedX; ballY += ballSpeedY;
+            // Wall collision (top/bottom)
+            if(ballY - BALL_RADIUS < 0 || ballY + BALL_RADIUS > CANVAS_H) ballSpeedY = -ballSpeedY;
+            // Paddle collision
+            // P1
+            if(ballX - BALL_RADIUS < PADDLE_WIDTH && ballY > p1Y && ballY < p1Y + PADDLE_HEIGHT) {
+                ballSpeedX = -ballSpeedX;
+                let deltaY = ballY - (p1Y + PADDLE_HEIGHT/2);
+                ballSpeedY = deltaY * 0.25; // More angle based on hit position
+            }
+            // P2
+            if(ballX + BALL_RADIUS > CANVAS_W - PADDLE_WIDTH && ballY > p2Y && ballY < p2Y + PADDLE_HEIGHT) {
+                ballSpeedX = -ballSpeedX;
+                let deltaY = ballY - (p2Y + PADDLE_HEIGHT/2);
+                ballSpeedY = deltaY * 0.25;
+            }
+            // Score
+            if(ballX - BALL_RADIUS < 0) { p2Score++; updatePongScore(); resetBall(); }
+            if(ballX + BALL_RADIUS > CANVAS_W) { p1Score++; updatePongScore(); resetBall(); }
+        }
+        function gameLoopPong() { if(!isGameRunningPong) return; movePaddles(); moveBallPong(); drawPong(); }
+        function startGamePong() { if(isGameRunningPong) return; initVarsPong(); isGameRunningPong=true; startButton.textContent="Playing..."; startButton.disabled=true; gameLoopInterval = setInterval(gameLoopPong, 1000/60); /* Aim for 60 FPS */ drawPong(); }
+        function stopPong() { clearInterval(gameLoopInterval); isGameRunningPong = false; }
+
+        startButton.addEventListener('click', startGamePong);
+        // Key listeners are global, filtered by activeGameModalId
+        initVarsPong(); // Initialize on load
+        return { init: initVarsPong, startGame: startGamePong, stop: stopPong, isRunning: () => isGameRunningPong };
+    })();
+
+    // --- Initial Page Setup ---
+    highlightNavOnScroll();
+    // Games are initialized by their IIFEs.
+
+    </script><script type="text/javascript">
+	atOptions = {
+		'key' : '0126d85100ebf2cbe66d946fe4550207',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/0126d85100ebf2cbe66d946fe4550207/invoke.js"></script><script type="text/javascript">
+	atOptions = {
+		'key' : '0126d85100ebf2cbe66d946fe4550207',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/0126d85100ebf2cbe66d946fe4550207/invoke.js"></script><script type="text/javascript">
+	atOptions = {
+		'key' : 'ee421598e207ac643e2838e584c35b0d',
+		'format' : 'iframe',
+		'height' : 300,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/ee421598e207ac643e2838e584c35b0d/invoke.js"></script><script type="text/javascript">
+	atOptions = {
+		'key' : 'ee421598e207ac643e2838e584c35b0d',
+		'format' : 'iframe',
+		'height' : 300,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/ee421598e207ac643e2838e584c35b0d/invoke.js"></script><script type="text/javascript">
+	atOptions = {
+		'key' : '262801d991abbce58346e672220caf93',
+		'format' : 'iframe',
+		'height' : 600,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/262801d991abbce58346e672220caf93/invoke.js"></script><a href="" rel="nofollow"><img alt="banner" src="https://landings-cdn.adsterratech.com/referralBanners/gif/120x300_adsterra_reff.gif" /></a>
+</body>
+</html>
